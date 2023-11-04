@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
+        // A company name must be unique.
+        do {
+            $name = fake()->company() . ' ' . fake()->companySuffix();
+        } while (Company::where('name', $name)->exists());
+
         return [
-            'name' => fake()->company() . ' ' . fake()->companySuffix(),
+            'name' => $name,
         ];
     }
 }
