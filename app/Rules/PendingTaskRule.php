@@ -2,10 +2,12 @@
 
 namespace App\Rules;
 
+use App\Models\Task;
 use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Gate;
 
 class PendingTaskRule implements ValidationRule, DataAwareRule
 {
@@ -42,7 +44,7 @@ class PendingTaskRule implements ValidationRule, DataAwareRule
             return;
         }
 
-        $canCreatePendingTask = $user->can('create-pending-task');
+        $canCreatePendingTask = $user->can('create-pending-task', Task::class);
 
         if (! $canCreatePendingTask) {
             $fail('The user has reached the limit (5) of pending tasks.');
