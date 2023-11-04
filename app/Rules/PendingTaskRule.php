@@ -39,6 +39,7 @@ class PendingTaskRule implements ValidationRule, DataAwareRule
 
         if (! $user) {
             $fail('The user does not exist.');
+            return;
         }
 
         $canCreatePendingTask = $user->can('create-pending-task');
