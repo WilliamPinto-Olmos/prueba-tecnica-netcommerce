@@ -19,7 +19,7 @@ final class CreateNewTask
             'description' => 'nullable|string|max:500',
             'user_id' => 'required|integer|exists:users,id',
             'company_id' => 'required|integer|exists:companies,id',
-            'is_completed' => ['nullable', 'boolean', new PendingTaskRule()],
+            'is_completed' => ['required', 'boolean', new PendingTaskRule()],
             'start_at' => 'nullable|date_format:Y-m-d H:i:s',
             'expired_at' => 'nullable|date_format:Y-m-d H:i:s',
         ])->validate();
