@@ -12,8 +12,8 @@ final readonly class TaskDTO
         public string $user_id,
         public string $company_id,
         public ?bool $is_completed,
-        public ?Carbon $start_at,
-        public ?Carbon $expired_at,
+        public ?string $start_at,
+        public ?string $expired_at,
     ){}
 
     /**
@@ -27,8 +27,8 @@ final readonly class TaskDTO
             user_id: strval($data['user_id']),
             company_id: strval($data['company_id']),
             is_completed: boolval($data['is_completed']) ?? null,
-            start_at: isset($data['start_at']) ? Carbon::parse($data['start_at']) : null,
-            expired_at: isset($data['expired_at']) ? Carbon::parse($data['expired_at']) : null,
+            start_at: isset($data['start_at']) ?? null,
+            expired_at: isset($data['expired_at']) ?? null,
         );
     }
 
@@ -43,8 +43,8 @@ final readonly class TaskDTO
             'user_id' => $this->user_id,
             'company_id' => $this->company_id,
             'is_completed' => $this->is_completed ?? null,
-            'start_at' => $this->start_at ? $this->start_at->format('Y-m-d H:i:s') : null,
-            'expired_at' => $this->expired_at ? $this->expired_at->format('Y-m-d H:i:s') : null,
+            'start_at' => $this->start_at ?? null,
+            'expired_at' => $this->expired_at ?? null,
         ];
     }
 }
