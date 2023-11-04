@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Eloquent\Builders\TaskBuilder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +24,14 @@ class Task extends Model
         'start_at',
         'expired_at',
     ];
+
+    /**
+     * Register a custom builder for the model.
+     */
+    public function newEloquentBuilder($query): Builder
+    {
+        return new TaskBuilder($query);
+    }
 
     /**
      * A task belongs to a user.
